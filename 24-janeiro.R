@@ -87,18 +87,20 @@ respostas = c()
 teste[1,5]
 
 for(j in 1:nrow(teste)) {
-  if(teste$Petal.Length[j] < 2) {
+  if(teste$Petal.Length[j] < 2) { # pela largura do grafico Petal.width por Petal.length
     respostas[j] = "setosa"
   }else {
-    if(teste$Petal.Width[j] < 1.6){
+    if(teste$Petal.Width[j] < 1.7){ # pela altura do grafico Petal.width por Petal.length
       respostas[j] = "versicolor"
     }else {
       respostas[j] = "virginica"
     }
   }
 }
-abline(h=1.6)
+abline(h=1.7)
+abline(v=2)
 respostas
 
 # comparar com o real
 mean(respostas == teste$Species)
+

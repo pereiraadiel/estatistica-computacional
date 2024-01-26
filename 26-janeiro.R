@@ -58,4 +58,7 @@ summary(dados)
 ggplot(data = dados, mapping = aes(x = island, fill= species))+geom_bar()+theme_replace()
 
       
-ggplot(data= dados, mapping= aes(x=culmen_length_mm, y=flipper_length_mm, color=species))+geom_jitter()+theme_minimal()
+ggplot(data= dados, mapping= aes(x=culmen_length_mm, y=flipper_length_mm, color=species))+geom_jitter(size=1.5, alpha=0.5)+theme_minimal()
+
+
+ggplot(data = dados, mapping = aes(y=flipper_length_mm, x=species))+geom_boxplot()

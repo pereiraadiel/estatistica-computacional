@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="@pereiraadiel">
+
+<title>Doenças do coração</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="doencas-coracao_files/libs/clipboard/clipboard.min.js"></script>
+<script src="doencas-coracao_files/libs/quarto-html/quarto.js"></script>
+<script src="doencas-coracao_files/libs/quarto-html/popper.min.js"></script>
+<script src="doencas-coracao_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="doencas-coracao_files/libs/quarto-html/anchor.min.js"></script>
+<link href="doencas-coracao_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="doencas-coracao_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="doencas-coracao_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="doencas-coracao_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="doencas-coracao_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Doenças do coração</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p><span class="citation" data-cites="pereiraadiel">@pereiraadiel</span> </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Data de Publicação</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">20 de março de 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introdução" class="level2">
+<h2 class="anchored" data-anchor-id="introdução">Introdução</h2>
+<section id="projeto-para-analisar-possiveis-doenças-de-coração-em-pacientes-obtidos-do-conjunto-de-dados-do-repositório-uc-irvine-machine-learning.-nesta-apresentação-trazemos-uma-análise-descritiva-dos-dados-e-na-parte-final-criaremos-um-modelo-capaz-de-prever-se-um-paciente-tem-ou-nao-uma-doença-de-coração." class="level4">
+<h4 class="anchored" data-anchor-id="projeto-para-analisar-possiveis-doenças-de-coração-em-pacientes-obtidos-do-conjunto-de-dados-do-repositório-uc-irvine-machine-learning.-nesta-apresentação-trazemos-uma-análise-descritiva-dos-dados-e-na-parte-final-criaremos-um-modelo-capaz-de-prever-se-um-paciente-tem-ou-nao-uma-doença-de-coração.">Projeto para analisar possiveis doenças de coração em pacientes obtidos do conjunto de dados do repositório <a href="http://archive.ics.uci.edu/dataset/45/heart+disease">UC Irvine Machine Learning</a>. Nesta apresentação trazemos uma análise descritiva dos dados e na parte final criaremos um modelo capaz de prever se um paciente tem ou nao uma doença de coração.</h4>
+</section>
+</section>
+<section id="conhecendo-os-dados" class="level2">
+<h2 class="anchored" data-anchor-id="conhecendo-os-dados">Conhecendo os dados</h2>
+<section id="a-seguir-importamos-os-pactoes-que-serão-úteis-para-realização-do-projeto" class="level4">
+<h4 class="anchored" data-anchor-id="a-seguir-importamos-os-pactoes-que-serão-úteis-para-realização-do-projeto">A seguir, importamos os pactoes que serão úteis para realização do projeto</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># visualização gráfica dos dados</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart) <span class="co"># usado para gerar a arvore de decisão</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot) <span class="co"># plotar a arvore de decisão graficamente</span></span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="importando-o-conjunto-de-dados" class="level2">
+<h2 class="anchored" data-anchor-id="importando-o-conjunto-de-dados">Importando o conjunto de dados</h2>
+<section id="a-seguir-importaremo-o-conjunto-de-dados-diretamente-do-repositório-supracitado" class="level4">
+<h4 class="anchored" data-anchor-id="a-seguir-importaremo-o-conjunto-de-dados-diretamente-do-repositório-supracitado">A seguir, importaremo o conjunto de dados diretamente do repositório supracitado</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"heart.csv"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="conhecendo-a-estrutura-dos-dados" class="level4">
+<h4 class="anchored" data-anchor-id="conhecendo-a-estrutura-dos-dados">Conhecendo a estrutura dos dados</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dados)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      age             sex               cp            trestbps    
+ Min.   :29.00   Min.   :0.0000   Min.   :0.0000   Min.   : 94.0  
+ 1st Qu.:48.00   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:120.0  
+ Median :56.00   Median :1.0000   Median :1.0000   Median :130.0  
+ Mean   :54.43   Mean   :0.6956   Mean   :0.9424   Mean   :131.6  
+ 3rd Qu.:61.00   3rd Qu.:1.0000   3rd Qu.:2.0000   3rd Qu.:140.0  
+ Max.   :77.00   Max.   :1.0000   Max.   :3.0000   Max.   :200.0  
+      chol          fbs            restecg          thalach     
+ Min.   :126   Min.   :0.0000   Min.   :0.0000   Min.   : 71.0  
+ 1st Qu.:211   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:132.0  
+ Median :240   Median :0.0000   Median :1.0000   Median :152.0  
+ Mean   :246   Mean   :0.1493   Mean   :0.5298   Mean   :149.1  
+ 3rd Qu.:275   3rd Qu.:0.0000   3rd Qu.:1.0000   3rd Qu.:166.0  
+ Max.   :564   Max.   :1.0000   Max.   :2.0000   Max.   :202.0  
+     exang           oldpeak          slope             ca        
+ Min.   :0.0000   Min.   :0.000   Min.   :0.000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.000   1st Qu.:1.000   1st Qu.:0.0000  
+ Median :0.0000   Median :0.800   Median :1.000   Median :0.0000  
+ Mean   :0.3366   Mean   :1.072   Mean   :1.385   Mean   :0.7541  
+ 3rd Qu.:1.0000   3rd Qu.:1.800   3rd Qu.:2.000   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :6.200   Max.   :2.000   Max.   :4.0000  
+      thal           target      
+ Min.   :0.000   Min.   :0.0000  
+ 1st Qu.:2.000   1st Qu.:0.0000  
+ Median :2.000   Median :1.0000  
+ Mean   :2.324   Mean   :0.5132  
+ 3rd Qu.:3.000   3rd Qu.:1.0000  
+ Max.   :3.000   Max.   :1.0000  </code></pre>
+</div>
+</div>
+</section>
+<section id="algumas-variaveis-não-estão-categorizadas-aqui-vamos-transforma-las-em-variaveis-categoricas" class="level4">
+<h4 class="anchored" data-anchor-id="algumas-variaveis-não-estão-categorizadas-aqui-vamos-transforma-las-em-variaveis-categoricas">Algumas variaveis não estão categorizadas, aqui vamos transforma-las em variaveis categoricas</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lapply aplica uma função a varios itens do vetor ao mesmo tempo · neste caso aplicando factor nas colunas selecionadas</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dados[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">14</span>)] <span class="ot">=</span> <span class="fu">lapply</span>(dados[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">11</span>,<span class="dv">12</span>,<span class="dv">13</span>,<span class="dv">14</span>)], factor)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="estrutura-dos-dados-parseados" class="level4">
+<h4 class="anchored" data-anchor-id="estrutura-dos-dados-parseados">Estrutura dos dados parseados</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dados)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      age        sex     cp         trestbps          chol     fbs     restecg
+ Min.   :29.00   0:312   0:497   Min.   : 94.0   Min.   :126   0:872   0:497  
+ 1st Qu.:48.00   1:713   1:167   1st Qu.:120.0   1st Qu.:211   1:153   1:513  
+ Median :56.00           2:284   Median :130.0   Median :240           2: 15  
+ Mean   :54.43           3: 77   Mean   :131.6   Mean   :246                  
+ 3rd Qu.:61.00                   3rd Qu.:140.0   3rd Qu.:275                  
+ Max.   :77.00                   Max.   :200.0   Max.   :564                  
+    thalach      exang      oldpeak      slope   ca      thal    target 
+ Min.   : 71.0   0:680   Min.   :0.000   0: 74   0:578   0:  7   0:499  
+ 1st Qu.:132.0   1:345   1st Qu.:0.000   1:482   1:226   1: 64   1:526  
+ Median :152.0           Median :0.800   2:469   2:134   2:544          
+ Mean   :149.1           Mean   :1.072           3: 69   3:410          
+ 3rd Qu.:166.0           3rd Qu.:1.800           4: 18                  
+ Max.   :202.0           Max.   :6.200                                  </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="analizando-gráficamente-o-conjunto-de-dados" class="level2">
+<h2 class="anchored" data-anchor-id="analizando-gráficamente-o-conjunto-de-dados">Analizando gráficamente o conjunto de dados</h2>
+<p>no grafico a seguir vemos que a distribuição de pessoas que possuem e nao possuem doenças de coração esta equilibrada</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="doencas-coracao_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>no grafico a seguir vemos que mulheres possuem mais doença do coração neste conjunto de dados</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="doencas-coracao_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="criando-modelo-preditivo-arvore-de-decisão" class="level2">
+<h2 class="anchored" data-anchor-id="criando-modelo-preditivo-arvore-de-decisão">Criando modelo preditivo (arvore de decisão)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># embaralhar o conjuto de dados</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">=</span>  dados[<span class="fu">sample</span>(<span class="fu">nrow</span>(dados)),]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">round</span>(<span class="fl">0.8</span> <span class="sc">*</span> <span class="fu">nrow</span>(dados))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>treino <span class="ot">=</span> dados[<span class="dv">1</span><span class="sc">:</span>n, ]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>teste <span class="ot">=</span> dados[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>n),]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>arvore.heart <span class="ot">=</span> <span class="fu">rpart</span>(<span class="at">formula=</span>target<span class="sc">~</span>., <span class="at">data=</span>treino)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(arvore.heart, <span class="at">extra=</span><span class="dv">101</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="doencas-coracao_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>previsao <span class="ot">=</span> <span class="fu">predict</span>(arvore.heart, <span class="at">newdata=</span>teste, <span class="at">type=</span><span class="st">"class"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#previsao</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(previsao <span class="sc">==</span> teste<span class="sc">$</span>target)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8536585</code></pre>
+</div>
+</div>
+<p>vamos avaliar a precisão do modelo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(previsao, teste<span class="sc">$</span>target)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+previsao  0  1
+       0 94 17
+       1 13 81</code></pre>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiada");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,93 @@
+---
+title: "Doenças do coração"
+author: "@pereiraadiel"
+format: html
+editor: visual
+lang: pt-BR
+date: today
+---
+
+## Introdução
+
+#### Projeto para analisar possiveis doenças de coração em pacientes obtidos do conjunto de dados do repositório [UC Irvine Machine Learning](http://archive.ics.uci.edu/dataset/45/heart+disease). Nesta apresentação trazemos uma análise descritiva dos dados e na parte final criaremos um modelo capaz de prever  se um paciente tem ou nao uma doença de coração.
+
+## Conhecendo os dados
+
+#### A seguir, importamos os pactoes que serão úteis para realização do projeto
+
+```{r}
+library(ggplot2) # visualização gráfica dos dados
+library(rpart) # usado para gerar a arvore de decisão
+library(rpart.plot) # plotar a arvore de decisão graficamente
+```
+
+## Importando o conjunto de dados
+
+#### A seguir, importaremo o conjunto de dados diretamente do repositório supracitado
+
+```{r}
+dados = read.csv("heart.csv")
+```
+
+#### Conhecendo a estrutura dos dados
+
+```{r}
+summary(dados)
+```
+
+#### Algumas variaveis não estão categorizadas, aqui vamos transforma-las em variaveis categoricas
+
+```{r}
+# lapply aplica uma função a varios itens do vetor ao mesmo tempo · neste caso aplicando factor nas colunas selecionadas
+dados[,c(2,3,6,7,9,11,12,13,14)] = lapply(dados[,c(2,3,6,7,9,11,12,13,14)], factor)
+```
+
+#### Estrutura dos dados parseados
+```{r}
+summary(dados)
+```
+
+## Analizando gráficamente o conjunto de dados
+no grafico a seguir vemos que a distribuição de pessoas que possuem e nao possuem doenças de coração esta equilibrada
+```{r}
+#| fig-align: center
+#| echo: false
+ggplot(data=dados, aes(x=target))+geom_bar()+theme_minimal()
+```
+
+no grafico a seguir vemos que mulheres possuem mais doença do coração neste conjunto de dados
+```{r}
+#| fig-align: center
+#| echo: false
+ggplot(data=dados, aes(fill=target, x=sex))+geom_bar()+theme_minimal()
+```
+
+## Criando modelo preditivo (arvore de decisão)
+
+```{r}
+# embaralhar o conjuto de dados
+#| fig-align: center
+dados =  dados[sample(nrow(dados)),]
+n = round(0.8 * nrow(dados))
+
+treino = dados[1:n, ]
+teste = dados[-(1:n),]
+
+arvore.heart = rpart(formula=target~., data=treino)
+rpart.plot(arvore.heart, extra=101)
+
+previsao = predict(arvore.heart, newdata=teste, type="class")
+#previsao
+mean(previsao == teste$target)
+```
+
+vamos avaliar a precisão do modelo
+```{r}
+table(previsao, teste$target)
+```
+
+
+
+
+
+

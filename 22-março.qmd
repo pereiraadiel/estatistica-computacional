@@ -1,0 +1,101 @@
+---
+title: "22-março"
+author: "@pereiraadiel"
+format: html
+editor: visual
+date: today
+lang: pt-BR
+---
+
+## Notas de aula do dia 22 de março
+
+### Importar bibliotecas necessarias
+
+```{r}
+library(rpart)
+library(rpart.plot)
+library(ggplot2)
+library(randomForest)
+```
+
+### Testando com conjunto IRIS
+
+```{r}
+
+set.seed(123)
+iris = iris[sample(nrow(iris)),]
+n = round(0.8*nrow(iris))
+
+treino = iris[1:n,]
+teste = iris[-(1:n),]
+
+arvore.iris = rpart(formula=Species ~., data=treino)
+rpart.plot(arvore.iris, extra=101)
+
+mean(predict(arvore.iris, newdata = teste, type='class')== teste$Species)
+
+```
+
+### Para reduzir o efeito de variancia na acurácia vamos utilizar uma floresta aleatória, isto é, um conjunto de várias árvores de decisão onde cada arvore da o seu valor para a acurácia e no final é feita a média geral considerando todas as arvores.
+
+```{r}
+tamanhoFloresta = 4
+
+par(mfrow=c(2,2))
+
+# criar uma amostra para cada arvore para ter a certeza que cada arvore tem uma amostra diferente, garantindo que a arvore não vai ser treinada com os mesmos dados
+for(i in 1:tamanhoFloresta){
+	amostra = treino[sample(1:120, replace=TRUE, size=120),]
+	arvore = rpart(formula=Species ~., data=amostra)
+	if(i==1){
+		floresta = arvore
+	}else{
+		floresta = rbind(floresta, arvore)
+	}
+	rpart.plot(arvore, extra=101)
+}
+```
+
+### Vamos criar uma floresta aleatória de verdade com a biblioteca randomForest
+
+```{r}
+tamanhoFloresta = 200 
+floresta.iris = randomForest(formula = Species ~., data=treino, ntree=tamanhoFloresta)
+floresta.iris
+
+# OOB = Out Of Bag: estimativa de quantos itens da amostra não foram usados para treinar a arvore
+
+previsao.florestas = predict(floresta.iris, newdata=teste, type='class')
+
+mean(previsao.florestas == teste$Species)
+
+plot(floresta.iris)
+```
+
+## Agora vamos mudar o conjunto de dados para o train_digits
+
+```{r}
+	treino.digitos = read.csv("train_digits.csv", header=TRUE)
+	# summary(treino.digitos)
+	
+	# obter as informações da linha 8
+	numero = as.numeric(treino.digitos[8, -1])
+	
+	numero
+	
+	# 28 pq a imagem possue 28*28 pixels
+	# exibir a imagem
+	matriz =matrix(numero, ncol=28, byrow=TRUE)
+	image(matriz, col=gray.colors(2))
+
+	# girar a imagem
+	novaMatriz = matrix(1: 784, ncol=28, byrow=TRUE)
+	image(novaMatriz, col=gray.colors(2))
+
+	for(i in 1:28){
+		novaMatriz[i,] = rev(matriz[i,])
+	}
+	image(novaMatriz, col=gray.colors(2))
+	
+```
+

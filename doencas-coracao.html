@@ -97,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Data de Publicação</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">20 de março de 2024</p>
+      <p class="date">22 de março de 2024</p>
     </div>
   </div>
   
@@ -226,14 +226,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># embaralhar o conjuto de dados</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-align: center</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">=</span>  dados[<span class="fu">sample</span>(<span class="fu">nrow</span>(dados)),]</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">round</span>(<span class="fl">0.8</span> <span class="sc">*</span> <span class="fu">nrow</span>(dados))</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>treino <span class="ot">=</span> dados[<span class="dv">1</span><span class="sc">:</span>n, ]</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>teste <span class="ot">=</span> dados[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>n),]</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>arvore.heart <span class="ot">=</span> <span class="fu">rpart</span>(<span class="at">formula=</span>target<span class="sc">~</span>., <span class="at">data=</span>treino)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(arvore.heart, <span class="at">extra=</span><span class="dv">101</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">=</span>  dados[<span class="fu">sample</span>(<span class="fu">nrow</span>(dados)),]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">round</span>(<span class="fl">0.8</span> <span class="sc">*</span> <span class="fu">nrow</span>(dados))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>treino <span class="ot">=</span> dados[<span class="dv">1</span><span class="sc">:</span>n, ]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>teste <span class="ot">=</span> dados[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span>n),]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>arvore.heart <span class="ot">=</span> <span class="fu">rpart</span>(<span class="at">formula=</span>target<span class="sc">~</span>., <span class="at">data=</span>treino)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(arvore.heart, <span class="at">extra=</span><span class="dv">101</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="doencas-coracao_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -241,17 +242,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#previsao</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(previsao <span class="sc">==</span> teste<span class="sc">$</span>target)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8536585</code></pre>
+<pre><code>[1] 0.902439</code></pre>
 </div>
 </div>
-<p>vamos avaliar a precisão do modelo</p>
+</section>
+<section id="vamos-avaliar-a-precisão-do-modelo" class="level1">
+<h1>vamos avaliar a precisão do modelo</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(previsao, teste<span class="sc">$</span>target)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        
-previsao  0  1
-       0 94 17
-       1 13 81</code></pre>
+previsao   0   1
+       0  80   5
+       1  15 105</code></pre>
 </div>
 </div>
 </section>

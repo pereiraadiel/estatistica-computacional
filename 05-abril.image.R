@@ -18,7 +18,7 @@ y = rep(altura:1, times=largura) # altura
 
 dados = data.frame(x=x, y=y, red=red, green=green, blue=blue)
 
-modelo = kmeans(dados[, 3:5], centers=2) # 3 aglomerados
+modelo = kmeans(dados[, 3:5], centers=5) # 3 aglomerados
 modelo$centers
 
 modelo$cluster
